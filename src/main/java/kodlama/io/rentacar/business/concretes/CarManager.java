@@ -43,8 +43,14 @@ public class CarManager implements CarService {
 
 
     @Override
-    public UpdateCarResponse update(int id, UpdateCarRequest request) {
-        return null;
+    public UpdateCarResponse update(int id, UpdateCarRequest request){
+        checkIfCarExists(id);
+        Car car = mapper.map(request,Car.class);
+        car.setId(id);
+        repository.save(car);
+
+        UpdateCarResponse response = mapper.map(car,UpdateCarResponse.class);
+        return response;
     }
 
     @Override
