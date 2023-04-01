@@ -1,7 +1,7 @@
-package kodlama.io.rentacar.entities;
+package kodlama.io.rentacar.business.dto.requests.update;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import kodlama.io.rentacar.entities.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,21 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name="Cars")
-public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UpdateMaintenanceRequest {
     private int id;
     private int modelYear;
     private String plate;
     private double dailyPrice;
     @Enumerated(EnumType.STRING)
     private State state; // 1 Available, 2 Rented 3 Maintenance
-    @ManyToOne
-    @JoinColumn(name="model_id", nullable = true)
-    @JsonIgnore
-    private Model model;
-
-
+    private int modelId;
 }

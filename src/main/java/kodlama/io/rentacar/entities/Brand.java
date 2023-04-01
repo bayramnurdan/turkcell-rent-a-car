@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name="brands") //özel isimlendirme için
 
 public class Brand {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

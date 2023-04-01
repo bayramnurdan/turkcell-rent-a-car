@@ -19,5 +19,5 @@ public class GetCarResponse {
     private double dailyPrice;
     @Enumerated(EnumType.STRING)
     private State state;
-    private int modelId;
+
 }

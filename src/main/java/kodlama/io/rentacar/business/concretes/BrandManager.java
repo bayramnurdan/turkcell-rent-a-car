@@ -44,9 +44,10 @@ private final ModelMapper mapper;
     @Override
     public CreateBrandResponse add(CreateBrandRequest request) {
         Brand brand = mapper.map(request, Brand.class); // iki sınıftaki field isimlerini eşliyor.
-        brand.setId(0); //olası hatayı önlemek için, idleri genelde karıştırıyor.
-        repository.save(brand);
-        CreateBrandResponse response = mapper.map(brand, CreateBrandResponse.class);
+        brand.setId(0);  //save hem update hem insert için kullanılıyor
+        //olası hatayı önlemek için, idleri genelde karıştırıyor.
+        Brand createdBrand = repository.save(brand);
+        CreateBrandResponse response = mapper.map(createdBrand, CreateBrandResponse.class);
         return response;
     }
 
@@ -65,6 +66,8 @@ private final ModelMapper mapper;
     public void delete(int id) {
         repository.deleteById(id);
     }
+
+    //Business Rules
 
     private void checkIfBrandExists(int id){
         if (!repository.existsById(id)) throw new RuntimeException("Böyle bir marka mevcut değil.");

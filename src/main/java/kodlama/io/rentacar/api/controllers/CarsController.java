@@ -6,7 +6,9 @@ import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
+import kodlama.io.rentacar.business.dto.responses.update.UpdateAvailabilityResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
+import kodlama.io.rentacar.business.dto.responses.update.UpdateMaintenanceResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,11 @@ public class CarsController {
     @GetMapping
     public List<GetAllCarsResponse> getAll(){
         return service.getAll();
+    }
+
+    @GetMapping("/get/{state}")
+    public List<GetAllCarsResponse> getAllbyState(@PathVariable String state){
+        return service.getAllByState(state);
     }
 
     @GetMapping("/{id}")
@@ -46,6 +53,20 @@ public class CarsController {
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
+
+    @PutMapping("/update-maintenance/{id}")
+    public UpdateMaintenanceResponse updateMaintenance(@PathVariable int id){
+        return service.maintenance(id);
+
+    }
+
+    @PutMapping("/update-availability/{id}")
+    public UpdateAvailabilityResponse updateAvailability(@PathVariable int id){
+        return service.updateAvailability(id);
+    }
+
+
+
 
 
 
