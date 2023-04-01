@@ -50,8 +50,14 @@ public class ModelManager implements ModelService {
     }
 
     @Override
-    public UpdateModelResponse update(int id, UpdateModelRequest request) {  //TEKRAR BAK
-        return null;
+    public UpdateModelResponse update(int id, UpdateModelRequest request){
+        checkIfModelExists(id);
+        Model model = mapper.map(request,Model.class);
+        model.setId(id);
+        repository.save(model);
+
+        UpdateModelResponse response = mapper.map(model,UpdateModelResponse.class);
+        return response;
     }
 
     @Override
