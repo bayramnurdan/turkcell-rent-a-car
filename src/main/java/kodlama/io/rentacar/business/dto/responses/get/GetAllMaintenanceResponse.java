@@ -11,10 +11,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetMaintenanceResponse {
+public class GetAllMaintenanceResponse {
     private int id;
-
-    private int carId;
+    private int car_id;
 
     private Timestamp sendDate;
 

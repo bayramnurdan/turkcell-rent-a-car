@@ -1,4 +1,4 @@
-package kodlama.io.rentacar.business.dto.responses.get;
+package kodlama.io.rentacar.business.dto.responses.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,12 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetMaintenanceResponse {
+public class CreateMaintenanceResponse {
     private int id;
 
     private int carId;
 
     private Timestamp sendDate;
 
-    private Timestamp returnDate;
+
 }
