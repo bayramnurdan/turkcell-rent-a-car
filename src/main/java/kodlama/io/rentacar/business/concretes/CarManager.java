@@ -5,10 +5,10 @@ import kodlama.io.rentacar.business.dto.requests.create.CreateCarRequest;
 import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllMaintenanceResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
 import kodlama.io.rentacar.entities.Car;
+import kodlama.io.rentacar.entities.enums.State;
 import kodlama.io.rentacar.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -54,10 +54,10 @@ public class CarManager implements CarService {
 
 
     @Override
-    public UpdateCarResponse update(int id, UpdateCarRequest request){
-        checkIfCarExists(id);
+    public UpdateCarResponse update(UpdateCarRequest request){
+        checkIfCarExists(request.getId());
         Car car = mapper.map(request,Car.class);
-        car.setId(id);
+        car.setId(request.getId());
         repository.save(car);
 
         UpdateCarResponse response = mapper.map(car,UpdateCarResponse.class);
@@ -68,6 +68,7 @@ public class CarManager implements CarService {
     public CreateCarResponse add(CreateCarRequest request) {
         Car car = mapper.map(request, Car.class);
         car.setId(0);
+        car.setState(State.AVAILABLE);
         repository.save(car);
         CreateCarResponse response = mapper.map(car, CreateCarResponse.class);
         return response;
@@ -76,17 +77,19 @@ public class CarManager implements CarService {
 
     @Override
     public void delete(int id) {
-        checkIfCarExists(id);
+        //checkIfCarExists(id);
         repository.deleteById(id);
     }
 
     @Override
-    public List<GetAllMaintenanceResponse> showMaintenancies(int id) {
-        Car car = repository.findById(id).orElseThrow();
-        List<GetAllMaintenanceResponse> maintenances = car.getMaintenances().stream()
-                .map(maintenance -> mapper.map(maintenance, GetAllMaintenanceResponse.class)).toList();
-        return maintenances;
+    public void changeState(int carId, State state) {
+//        checkIfCarExists(carId);
+        Car car = repository.findById(carId).orElseThrow();
+        car.setState(state);
+        repository.save(car);
     }
+
+
 
 
     private void checkIfCarExists(int id){

@@ -33,7 +33,7 @@ public class ModelManager implements ModelService {
 
     @Override
     public GetModelResponse getById(int id) {
-        checkIfModelExists(id);
+        checkIfModelExistsById(id);
         Model model = repository.findById(id).orElseThrow();
         GetModelResponse response = mapper.map(model, GetModelResponse.class);
 
@@ -42,32 +42,43 @@ public class ModelManager implements ModelService {
 
     @Override
     public CreateModelResponse add(CreateModelRequest request) {
-        Model model = mapper.map(request, Model.class); // iki sınıftaki field isimlerini eşliyor.
-        model.setId(0); //olası hatayı önlemek için, idleri genelde karıştırıyor.
+        checkIfModelExistsByName(request.getName());
+        Model model = mapper.map(request, Model.class);
+        model.setId(0);
         repository.save(model);
         CreateModelResponse response = mapper.map(model, CreateModelResponse.class);
         return response;
     }
 
     @Override
-    public UpdateModelResponse update(int id, UpdateModelRequest request){
-        checkIfModelExists(id);
-        Model model = mapper.map(request,Model.class);
+    public UpdateModelResponse update(int id, UpdateModelRequest request) {
+        checkIfModelExistsById(id);
+        Model model = mapper.map(request, Model.class);
         model.setId(id);
         repository.save(model);
 
-        UpdateModelResponse response = mapper.map(model,UpdateModelResponse.class);
+        UpdateModelResponse response = mapper.map(model, UpdateModelResponse.class);
         return response;
     }
 
     @Override
     public void delete(int id) {
+        checkIfModelExistsById(id);
+        repository.deleteById(id);
+
 
     }
 
-    private void checkIfModelExists(int id){
+    private void checkIfModelExistsById(int id) {
         if (!repository.existsById(id)) throw new RuntimeException("Böyle bir model mevcut değil.");
     }
 
+
+    private void checkIfModelExistsByName(String name) {
+        if (repository.existsByNameIgnoreCase(name)) {
+            throw new RuntimeException("Böyle bir model sistemde kayıtlı!");
+        }
+
+    }
 }
 

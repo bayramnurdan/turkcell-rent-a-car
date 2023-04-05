@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 
 public class CreateBrandRequest {
-    private int id;
     private String name;
+
 }

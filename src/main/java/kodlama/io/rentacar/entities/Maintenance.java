@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @AllArgsConstructor
@@ -21,12 +19,14 @@ public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne   //Bakım history
+    private String information;
+    private boolean isCompleted;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
-    @CreationTimestamp
-    @Column(updatable = false)
-    private Timestamp sendDate;
-    @UpdateTimestamp
-    private Timestamp returnDate;
+
 
 }

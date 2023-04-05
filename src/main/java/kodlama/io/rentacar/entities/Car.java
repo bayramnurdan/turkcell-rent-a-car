@@ -1,6 +1,5 @@
 package kodlama.io.rentacar.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kodlama.io.rentacar.entities.enums.State;
 import lombok.AllArgsConstructor;
@@ -25,12 +24,12 @@ public class Car {
     private double dailyPrice;
     @Enumerated(EnumType.STRING)
     private State state; // 1 Available, 2 Rented 3 Maintenance
+
     @ManyToOne
-    @JoinColumn(name="model_id", nullable = true)
-    @JsonIgnore
+    @JoinColumn(name="model_id")
     private Model model;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car") //ilişki sahibi many olan
     private List<Maintenance> maintenances;
 
 

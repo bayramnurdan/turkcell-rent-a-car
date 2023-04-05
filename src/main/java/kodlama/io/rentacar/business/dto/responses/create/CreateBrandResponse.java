@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateBrandResponse {
-    private int id;
     private String name;
+    private int brandId;
 }

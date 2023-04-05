@@ -5,7 +5,6 @@ import kodlama.io.rentacar.business.dto.requests.create.CreateCarRequest;
 import kodlama.io.rentacar.business.dto.requests.update.UpdateCarRequest;
 import kodlama.io.rentacar.business.dto.responses.create.CreateCarResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetAllCarsResponse;
-import kodlama.io.rentacar.business.dto.responses.get.GetAllMaintenanceResponse;
 import kodlama.io.rentacar.business.dto.responses.get.GetCarResponse;
 import kodlama.io.rentacar.business.dto.responses.update.UpdateCarResponse;
 import lombok.AllArgsConstructor;
@@ -26,9 +25,8 @@ public class CarsController {
     }
 
 
-
     @GetMapping("/get/{state}")
-    public List<GetAllCarsResponse> getAllbyState(@PathVariable String state){
+    public List<GetAllCarsResponse> getAllByState(@PathVariable String state){
         return service.getAllByState(state);
     }
 
@@ -44,9 +42,9 @@ public class CarsController {
         return service.add(request);
     }
 
-    @PutMapping("/{id}")
-    public UpdateCarResponse update(@PathVariable int id, @RequestBody UpdateCarRequest request) {
-        return service.update(id, request);
+    @PutMapping
+    public UpdateCarResponse update(@RequestBody UpdateCarRequest request) {
+        return service.update(request);
     }
 
     @DeleteMapping("/{id}")
@@ -54,16 +52,5 @@ public class CarsController {
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
-
-    @GetMapping("/maintenancies/{id}")
-    public List<GetAllMaintenanceResponse> showMaintenancies(@PathVariable int id){
-        return service.showMaintenancies(id);
-    }
-
-
-
-
-
-
 
 }

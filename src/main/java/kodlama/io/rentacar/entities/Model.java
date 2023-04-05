@@ -19,11 +19,12 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+
     @ManyToOne
-    @JoinColumn(name="brand_id") // brand id  brand PK yi getiriyor
+    @JoinColumn(name="brandId") // brand id  brand PK yi getiriyor
     private Brand brand;
-    @OneToMany(mappedBy = "model") // ilişkisi sahibi car
-    //@JsonManagedReference
+
+    @OneToMany(mappedBy = "model") // ilişki sahibi many olan car
     private List<Car> cars;
 
 
