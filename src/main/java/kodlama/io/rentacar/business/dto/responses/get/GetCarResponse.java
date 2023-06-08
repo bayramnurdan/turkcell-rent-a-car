@@ -14,10 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GetCarResponse {
     private int id;
+    private int modelId;
+    private double dailyPrice;
     private int modelYear;
     private String plate;
-    private double dailyPrice;
-    @Enumerated(EnumType.STRING)
     private State state;
+    private String modelName;
+    private String modelBrandName;
 
 }

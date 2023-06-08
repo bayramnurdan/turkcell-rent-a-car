@@ -29,7 +29,7 @@ public class Car {
     @JoinColumn(name="model_id")
     private Model model;
 
-    @OneToMany(mappedBy = "car") //ilişki sahibi many olan
+    @OneToMany(mappedBy = "car")
     private List<Maintenance> maintenances;
 
 

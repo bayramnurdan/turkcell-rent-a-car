@@ -42,9 +42,9 @@ public class CarsController {
         return service.add(request);
     }
 
-    @PutMapping
-    public UpdateCarResponse update(@RequestBody UpdateCarRequest request) {
-        return service.update(request);
+    @PutMapping("{id}")
+    public UpdateCarResponse update(@PathVariable int id, @RequestBody UpdateCarRequest request) {
+        return service.update(id, request);
     }
 
     @DeleteMapping("/{id}")

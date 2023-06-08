@@ -12,6 +12,4 @@ import lombok.Setter;
 public class CreateModelRequest {
     private String name;
     private int brandId;
-
-
 }

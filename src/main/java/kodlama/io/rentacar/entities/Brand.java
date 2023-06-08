@@ -13,13 +13,13 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="brands") //özel isimlendirme için
+@Table(name="brands")
 
 public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="ad") // özel isimlendirme için
+    @Column(name="ad")
     private String name;
 
     @OneToMany(mappedBy = "brand")

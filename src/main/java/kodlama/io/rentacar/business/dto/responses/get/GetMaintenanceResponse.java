@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,10 +14,9 @@ import java.sql.Timestamp;
 @Setter
 public class GetMaintenanceResponse {
     private int id;
-
     private int carId;
-
-    private Timestamp sendDate;
-
-    private Timestamp returnDate;
+    private String information;
+    private boolean isCompleted;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }

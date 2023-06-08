@@ -21,10 +21,10 @@ public class Model {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="brandId") // brand id  brand PK yi getiriyor
+    @JoinColumn(name="brandId")
     private Brand brand;
 
-    @OneToMany(mappedBy = "model") // ilişki sahibi many olan car
+    @OneToMany(mappedBy = "model")
     private List<Car> cars;
 
 
