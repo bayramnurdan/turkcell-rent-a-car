@@ -12,7 +12,8 @@ public class BrandBusinessRules {
     private final BrandRepository repository;
 
     public void checkIfBrandExists(int id) {
-        if (!repository.existsById(id)) throw new BusinessException(Messages.Brand.NOT_EXISTS);
+        if (!repository.existsById(id))
+            throw new BusinessException(Messages.Brand.NOT_EXISTS);
     }
 
     public void checkIfBrandExistsByName(String name) {
